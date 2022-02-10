@@ -9,7 +9,7 @@ public enum EMap {
 
 	TEST("Test"), HOLE_1("Hole 1"), HOLE_2("Hole 2"), 
 	HOLE_3("Hole 3"), HOLE_4("Hole 4"), HOLE_5("Hole 5"),
-	HOLE_6("Hole 6");
+	HOLE_6("Hole 6"), HOLE_7("Hole 7");
 
 	private final String name;
 	

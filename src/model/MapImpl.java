@@ -114,6 +114,18 @@ public class MapImpl implements Map {
 								new Wall(new Point2D(240, 110), 20, 190), new Wall(new Point2D(440, 100), 20, 150),
 								new Wall(new Point2D(130, 100), 20, 190), new Sand(new Point2D(460, 250), 260, 150)),
 						List.of(new Star(new Point2D(300, 40)), new Star(new Point2D(420, 300)), new Star(new Point2D(580, 40))));
+			//New Map Lava: map finished totalshots+=10, IronWall: rimbalzo perpendicolare al muro nel punto di impatto
+			case HOLE_7:
+				return new MapImpl(map.getName(),
+						new Dimension(720, 400),
+						new Ball(new Point2D(10, 200)),
+						List.of(),
+						List.of(new Wall(new Point2D(130, 130), 330, 30), new Wall(new Point2D(130, 240), 330, 30), 
+								new Wall(new Point2D(130, 160), 20, 80), new /*Iron*/Wall(new Point2D(580, 160), 30, 80), 
+								new Wall(new Point2D(580, 150), 50, 20), new Wall(new Point2D(580, 230), 50, 20),
+								new Sand(new Point2D(180, 270), 250, 130), new Sand(new Point2D(180, 0), 250, 130),
+								new /*Lava*/Sand(new Point2D(600, 40), 30, 30), new /*Lava*/Sand(new Point2D(600, 320), 30, 30)),
+						List.of(new Star(new Point2D(360, 190)), new Star(new Point2D(640, 190)), new Star(new Point2D(160, 190))));
 			default:
 				return null;
 		}
