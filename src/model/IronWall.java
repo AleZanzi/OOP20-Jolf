@@ -52,4 +52,28 @@ public class IronWall implements MapObject {
 	public void applyConstraintTo(final Ball ball) {
 		edges.stream().forEach(edge -> edge.applyConstraintTo(ball));
 	}
+	
+	/*
+	private static final Color IRONWALL_COLOR = new Color(192, 192, 192);
+	 
+	public IronWall(final Point2D position, final int width, final int height) {
+		super(position, width, height);
+	}
+
+	@Override
+	public void draw(final Graphics g) {
+		g.setColor(IRONWALL_COLOR);
+		g.fillRect(this.getPosition().getIntX(), this.getPosition().getIntY(), this.width, this.height);
+		g.setColor(Color.BLACK);
+		edges.forEach(edge -> g.drawLine(edge.getP1().getIntX(), 
+				edge.getP1().getIntY(), 
+				edge.getP2().getIntX(), 
+				edge.getP2().getIntY()));
+	}
+
+	@Override
+	public void applyConstraintTo(final Ball ball) {
+		//Inserire tipologia collisioni
+	}
+	*/
 }

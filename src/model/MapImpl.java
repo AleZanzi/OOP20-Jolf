@@ -124,7 +124,7 @@ public class MapImpl implements Map {
 								new Wall(new Point2D(130, 160), 20, 80), new IronWall(new Point2D(580, 160), 30, 80), 
 								new Wall(new Point2D(580, 150), 50, 20), new Wall(new Point2D(580, 230), 50, 20),
 								new Sand(new Point2D(180, 270), 250, 130), new Sand(new Point2D(180, 0), 250, 130),
-								new Lava(new Point2D(600, 40), 30, 30), new Lava(new Point2D(600, 320), 30, 30)),
+								new LavaPoddle(new Point2D(600, 40), 30, 30), new LavaPoddle(new Point2D(600, 320), 30, 30)),
 						List.of(new Star(new Point2D(360, 190)), new Star(new Point2D(640, 190)), new Star(new Point2D(160, 190))));
 			default:
 				return null;
