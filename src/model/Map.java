@@ -39,5 +39,9 @@ public interface Map {
 	 * @return the ball object in the map
 	 */
 	Ball getBall();
+	/**
+	 * @return the list of lava poddles in the map
+	 */
+	List<LavaPoddle> getLavaPoddles();
 	
 }

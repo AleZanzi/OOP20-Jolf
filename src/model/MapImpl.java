@@ -20,6 +20,7 @@ public class MapImpl implements Map {
 	private final List<MovingObject> movingObjects;
 	private final List<MapObject> objects;
 	private final List<Star> stars;
+	private final List<LavaPoddle> lavapoddles;
 	
 	/**
 	 * @param name
@@ -29,7 +30,7 @@ public class MapImpl implements Map {
 	 * @param otherObjects
 	 * @param stars
 	 */
-	private MapImpl(String name, Dimension size, Ball ball, List<MovingObject> otherMovingObjects, List<MapObject> otherObjects, List<Star> stars) {
+	private MapImpl(String name, Dimension size, Ball ball, List<MovingObject> otherMovingObjects, List<MapObject> otherObjects, List<Star> stars, List<LavaPoddle> lavapoddles) {
 		this.name = name;
 		this.size = size;
 		this.ball = ball;
@@ -37,9 +38,12 @@ public class MapImpl implements Map {
 		this.movingObjects.add(ball);
 		this.movingObjects.forEach(mo -> mo.setMap(this));
 		this.stars = new ArrayList<Star>(stars);
+		this.lavapoddles = new ArrayList<LavaPoddle>(lavapoddles);
 		this.objects = new ArrayList<MapObject>(otherObjects);
 		this.objects.addAll(movingObjects);
 		this.objects.addAll(stars);
+		this.objects.addAll(lavapoddles);
+		
 	}
 	
 	/**
@@ -54,55 +58,61 @@ public class MapImpl implements Map {
 						new Ball(new Point2D(100, 200)),
 						List.of(new MovingEdge(new Point2D(400, 20), new Point2D(400, 40), new Vector2D(0, 50))),
 						List.of(),
-						List.of(new Star(new Point2D(300, 100)), new Star(new Point2D(500, 300)), new Star(new Point2D(680, 180))));
+						List.of(new Star(new Point2D(300, 100)), new Star(new Point2D(500, 300)), new Star(new Point2D(680, 180))),
+						List.of());
 			case HOLE_1:
 				return new MapImpl(map.getName(),
 						new Dimension(720, 400),
 						new Ball(new Point2D(90, 200)),
 						List.of(),
-						List.of(new Wall(new Point2D(0, 100), 50, 200), new Wall(new Point2D(50, 100), 620, 40),
-								new Wall(new Point2D(50, 260), 620, 40), new Wall(new Point2D(670, 100), 50, 200),
-								new Wall(new Point2D(300, 140), 30, 60), new Wall(new Point2D(500, 200), 30, 60)),
-						List.of(new Star(new Point2D(190, 185)), new Star(new Point2D(385, 185)), new Star(new Point2D(635, 185))));
+						List.of(new WoodWall(new Point2D(0, 100), 50, 200), new WoodWall(new Point2D(50, 100), 620, 40),
+								new WoodWall(new Point2D(50, 260), 620, 40), new WoodWall(new Point2D(670, 100), 50, 200),
+								new WoodWall(new Point2D(300, 140), 30, 60), new WoodWall(new Point2D(500, 200), 30, 60)),
+						List.of(new Star(new Point2D(190, 185)), new Star(new Point2D(385, 185)), new Star(new Point2D(635, 185))),
+						List.of());
 			case HOLE_2:
 				return new MapImpl(map.getName(),
 						new Dimension(720, 400),
 						new Ball(new Point2D(50, 200)),
 						List.of(),
-						List.of(new Wall(new Point2D(130, 130), 300, 30), new Wall(new Point2D(130, 240), 300, 30),
+						List.of(new WoodWall(new Point2D(130, 130), 300, 30), new WoodWall(new Point2D(130, 240), 300, 30),
 								new Ice(new Point2D(130, 0), 300, 130), new Ice(new Point2D(130, 270), 300, 130),
 								new Sand(new Point2D(130, 160), 300, 80)),
-						List.of(new Star(new Point2D(450, 185)), new Star(new Point2D(600, 50)), new Star(new Point2D(600, 300))));
+						List.of(new Star(new Point2D(450, 185)), new Star(new Point2D(600, 50)), new Star(new Point2D(600, 300))),
+						List.of());
 			case HOLE_3:
 				return new MapImpl(map.getName(),
 						new Dimension(720, 400),
 						new Ball(new Point2D(30, 200)),
 						List.of(),
-						List.of(new Wall(new Point2D(110, 120), 300, 30), new Wall(new Point2D(180, 250), 300, 30), 
-								new Wall(new Point2D(570, 120), 30, 200),new Sand(new Point2D(180, 150), 230, 100), 
+						List.of(new WoodWall(new Point2D(110, 120), 300, 30), new WoodWall(new Point2D(180, 250), 300, 30), 
+								new WoodWall(new Point2D(570, 120), 30, 200),new Sand(new Point2D(180, 150), 230, 100), 
 								new Sand(new Point2D(600, 120), 150, 200)),
-						List.of(new Star(new Point2D(300, 45)), new Star(new Point2D(220, 350)), new Star(new Point2D(600, 300))));
+						List.of(new Star(new Point2D(300, 45)), new Star(new Point2D(220, 350)), new Star(new Point2D(600, 300))),
+						List.of());
 			case HOLE_4:
 				return new MapImpl(map.getName(),
 						new Dimension(720, 400),
 						new Ball(new Point2D(600, 350)),
 						List.of(),
-						List.of(new Wall(new Point2D(370, 0), 30, 180), new Wall(new Point2D(130, 240), 300, 30), 
-								new Wall(new Point2D(150, 0), 30, 100), new Wall(new Point2D(0, 150), 100, 30),
+						List.of(new WoodWall(new Point2D(370, 0), 30, 180), new WoodWall(new Point2D(130, 240), 300, 30), 
+								new WoodWall(new Point2D(150, 0), 30, 100), new WoodWall(new Point2D(0, 150), 100, 30),
 								new Ice(new Point2D(130, 270), 300, 130), new Sand(new Point2D(400, 0), 120, 180), 
 								new Sand(new Point2D(220, 400), 300, 80)),
-						List.of(new Star(new Point2D(600, 50)), new Star(new Point2D(250, 50)), new Star(new Point2D(150, 300))));
+						List.of(new Star(new Point2D(600, 50)), new Star(new Point2D(250, 50)), new Star(new Point2D(150, 300))),
+						List.of());
 			case HOLE_5:
 				return new MapImpl(map.getName(),
 						new Dimension(720, 400),
 						new Ball(new Point2D(10, 200)),
 						List.of(),
-						List.of(new Wall(new Point2D(130, 130), 300, 30), new Wall(new Point2D(130, 240), 300, 30), 
-								new Wall(new Point2D(550, 150), 30, 100), new Wall(new Point2D(580, 150), 50, 20), 
-								new Wall(new Point2D(670, 150), 50, 20), new Wall(new Point2D(580, 230), 50, 20), 
-								new Wall(new Point2D(670, 230), 50, 20), new Ice(new Point2D(130, 0), 300, 130), 
+						List.of(new WoodWall(new Point2D(130, 130), 300, 30), new WoodWall(new Point2D(130, 240), 300, 30), 
+								new WoodWall(new Point2D(550, 150), 30, 100), new WoodWall(new Point2D(580, 150), 50, 20), 
+								new WoodWall(new Point2D(670, 150), 50, 20), new WoodWall(new Point2D(580, 230), 50, 20), 
+								new WoodWall(new Point2D(670, 230), 50, 20), new Ice(new Point2D(130, 0), 300, 130), 
 								new Ice(new Point2D(130, 270), 300, 130), new Ice(new Point2D(130, 350), 300, 130)),
-						List.of(new Star(new Point2D(380, 60)), new Star(new Point2D(600, 190)), new Star(new Point2D(125, 350))));
+						List.of(new Star(new Point2D(380, 60)), new Star(new Point2D(600, 190)), new Star(new Point2D(125, 350))),
+						List.of());
 			case HOLE_6:
 				return new MapImpl(map.getName(),
 						new Dimension(720, 400),
@@ -111,21 +121,22 @@ public class MapImpl implements Map {
 						List.of(new Cone(new Point2D(50, 0), new Point2D(150, 100), new Point2D(250, 0)),
 								new Cone(new Point2D(150, 399), new Point2D(250, 300), new Point2D(350, 399)),
 								new Cone(new Point2D(400, 0), new Point2D(450, 100), new Point2D(500, 0)),
-								new Wall(new Point2D(240, 110), 20, 190), new Wall(new Point2D(440, 100), 20, 150),
-								new Wall(new Point2D(130, 100), 20, 190), new Sand(new Point2D(460, 250), 260, 150)),
-						List.of(new Star(new Point2D(300, 40)), new Star(new Point2D(420, 300)), new Star(new Point2D(580, 40))));
+								new WoodWall(new Point2D(240, 110), 20, 190), new WoodWall(new Point2D(440, 100), 20, 150),
+								new WoodWall(new Point2D(130, 100), 20, 190), new Sand(new Point2D(460, 250), 260, 150)),
+						List.of(new Star(new Point2D(300, 40)), new Star(new Point2D(420, 300)), new Star(new Point2D(580, 40))),
+						List.of());
 			//New Map Lava: map finished totalshots+=10, IronWall: rimbalzo perpendicolare al muro nel punto di impatto
 			case HOLE_7:
 				return new MapImpl(map.getName(),
 						new Dimension(720, 400),
 						new Ball(new Point2D(10, 200)),
 						List.of(),
-						List.of(new Wall(new Point2D(130, 130), 330, 30), new Wall(new Point2D(130, 240), 330, 30), 
-								new Wall(new Point2D(130, 160), 20, 80), new IronWall(new Point2D(580, 160), 30, 80), 
-								new Wall(new Point2D(580, 150), 50, 20), new Wall(new Point2D(580, 230), 50, 20),
-								new Sand(new Point2D(180, 270), 250, 130), new Sand(new Point2D(180, 0), 250, 130),
-								new LavaPoddle(new Point2D(600, 40), 30, 30), new LavaPoddle(new Point2D(600, 320), 30, 30)),
-						List.of(new Star(new Point2D(360, 190)), new Star(new Point2D(640, 190)), new Star(new Point2D(160, 190))));
+						List.of(new WoodWall(new Point2D(130, 130), 330, 30), new WoodWall(new Point2D(130, 240), 330, 30), 
+								new WoodWall(new Point2D(130, 160), 20, 80), new IronWall(new Point2D(580, 160), 30, 80), 
+								new WoodWall(new Point2D(580, 150), 50, 20), new WoodWall(new Point2D(580, 230), 50, 20),
+								new Sand(new Point2D(180, 270), 250, 130), new Sand(new Point2D(180, 0), 250, 130)),
+						List.of(new Star(new Point2D(360, 190)), new Star(new Point2D(640, 190)), new Star(new Point2D(160, 190))),
+						List.of(new LavaPoddle(new Point2D(600, 40), 30, 30), new LavaPoddle(new Point2D(600, 320), 30, 30)));
 			default:
 				return null;
 		}
@@ -167,6 +178,11 @@ public class MapImpl implements Map {
 	@Override
 	public String getName() {
 		return this.name;
+	}
+
+	@Override
+	public List<LavaPoddle> getLavaPoddles() {
+		return this.lavapoddles;
 	}
 
 }
