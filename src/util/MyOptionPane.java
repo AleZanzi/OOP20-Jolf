@@ -57,4 +57,10 @@ public class MyOptionPane extends JOptionPane {
 		menuGUI.setVisible(true);
 	}
 	
+	public static void gameOverLava(JFrame thisGUI, MenuGUI menuGUI, int totalShots) {
+		JOptionPane.showMessageDialog(thisGUI, "You it a lava poddle, shots increased by 10! Total shots " + totalShots + "!", "Be careful next time!", JOptionPane.PLAIN_MESSAGE);
+		thisGUI.dispose();
+		menuGUI.setVisible(true);
+	}
+	
 }

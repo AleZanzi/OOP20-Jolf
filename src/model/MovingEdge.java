@@ -24,7 +24,7 @@ public class MovingEdge extends MovingObject implements MapObject {
 	 */
 	public MovingEdge(Point2D p1, Point2D p2, Vector2D speed) {
 		super(p1, speed);
-		this.edge = new Edge(p1, p2);
+		this.edge = new RegularEdge(p1, p2);
 	}
 
 	@Override

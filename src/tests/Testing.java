@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import model.ECourse;
 import model.Edge;
+import model.RegularEdge;
 import util.Angle;
 import util.Point2D;
 import util.Vector2D;
@@ -29,7 +30,7 @@ public class Testing {
 	public void testVectorsAndEdges() {
 		Vector2D v = new Vector2D(10, 20);
 		Point2D p = new Point2D(40, 30);
-		Edge e = new Edge(0, 0, 20, 20);
+		Edge e = new RegularEdge(0, 0, 20, 20);
 		e = e.translate(v);
 		assertTrue(e.getP1().getX() == 10);
 		assertTrue(e.getP1().getY() == 20);

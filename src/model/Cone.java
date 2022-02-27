@@ -29,9 +29,9 @@ public class Cone implements MapObject {
 		this.point1 = point1;
 		this.point2 = point2;
 		this.point3 = point3;
-		edges = Set.of(new Edge(this.point1, this.point2), 
-				new Edge(this.point1, this.point3),
-				new Edge(this.point2, this.point3));
+		edges = Set.of(new RegularEdge(this.point1, this.point2), 
+				new RegularEdge(this.point1, this.point3),
+				new RegularEdge(this.point2, this.point3));
 	}
 
 	@Override
