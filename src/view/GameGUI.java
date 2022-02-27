@@ -148,6 +148,11 @@ public class GameGUI extends JFrame implements GameOutput, GameInput {
 	public void gameFinished(int totalShots) {
 		MyOptionPane.gameOver(this, this.menuGUI, totalShots);
 	}
+	
+	@Override
+	public void gameLost(int totalShots) {
+		MyOptionPane.gameOverLava(this, this.menuGUI, totalShots);
+	}
 
 	@Override
 	public void enableShot(Point ballPosition) {

@@ -30,6 +30,12 @@ public interface GameOutput {
 	 * @param totalShots
 	 */
 	void gameFinished(int totalShots);
+	
+	/**
+	 * lets the user know that the game is finished because he hitted a lava poddle
+	 * @param totalShots
+	 */
+	void gameLost(int totalShots);
 
 	/**
 	 * updates the objects positions

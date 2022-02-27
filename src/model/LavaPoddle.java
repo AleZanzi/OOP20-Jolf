@@ -13,14 +13,14 @@ public class LavaPoddle implements MapObject {
 	private final int width;
 	private final int height;
 	private final Rectangle2D hitbox;
-	private boolean isGameOver;
+	private boolean isLava;
 	
 	public LavaPoddle(final Point2D position, final int width, final int height) {
 		this.position = position;
 		this.width = width;
 		this.height = height;
 		this.hitbox = new Rectangle2D.Double(position.getX(), position.getY(), width, height);
-		this.isGameOver = false;
+		this.isLava = false;
 	}
 	
 	@Override
@@ -30,7 +30,7 @@ public class LavaPoddle implements MapObject {
 	
 	@Override
 	public String toString() {
-		return "LavaPoddle [isGameOver=" + isGameOver + ", hitbox: " + this.hitbox.getBounds().getCenterX() + ", " + this.hitbox.getBounds().getCenterY() + "]";
+		return "LavaPoddle [isGameOver=" + isLava + ", hitbox: " + this.hitbox.getBounds().getCenterX() + ", " + this.hitbox.getBounds().getCenterY() + "]";
 	}
 	
 	@Override
@@ -39,14 +39,14 @@ public class LavaPoddle implements MapObject {
 		g.fillRect(this.position.getIntX(), this.position.getIntY(), this.width, this.height);
 	}
 	
-	public boolean isGameOver() {
-		return isGameOver;
+	public boolean isLava() {
+		return isLava;
 	}
 
 	@Override
 	public void applyConstraintTo(Ball ball) {
 		if (this.hitbox.contains(ball.getPosition().getX(), ball.getPosition().getY())) {
-			this.isGameOver = true;
+			this.isLava = true;
 		}
 	}
 	

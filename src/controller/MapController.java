@@ -1,6 +1,7 @@
 package controller;
 import java.util.Optional;
 
+import model.LavaPoddle;
 import model.Map;
 import model.MapImpl;
 import model.MovingObject;
@@ -25,7 +26,6 @@ public class MapController extends Thread implements Controller {
 	private final Map map;
 	
 	private boolean playing = false;
-	private boolean forcedStop = false;
 	private boolean holeCreated = false;
 	private int currentShots;
 	
@@ -43,12 +43,18 @@ public class MapController extends Thread implements Controller {
 	@Override
 	public void run() {
 		try {
-			while (playing && !forcedStop) {
+			while (playing) {
 				if (!this.map.getBall().isMoving()) {
 					this.myInput.enableShot(this.map.getBall().getPosition().toPoint());
 				}
 				if (this.holeCreated && this.map.getStars().stream().anyMatch(Star::isGameOver)) {
 					this.playing = false;
+					this.myOutput.gameFinished(this.currentShots);
+				}
+				if(this.map.getLavaPoddles().stream().anyMatch(LavaPoddle::isLava)){
+					this.playing = false;
+					this.currentShots += 10;
+					this.myOutput.gameLost(this.currentShots);
 				}
 				if (!this.holeCreated && this.map.getStars().stream().filter(Star::isVisible).count() == 1) {
 					this.map.getStars().stream().filter(Star::isVisible).findFirst().ifPresent(Star::becomeHole);
@@ -59,9 +65,6 @@ public class MapController extends Thread implements Controller {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		if (!forcedStop) {
-			this.myOutput.gameFinished(this.currentShots);
 		}
 	}
 	
@@ -77,7 +80,7 @@ public class MapController extends Thread implements Controller {
 	
 	@Override
 	public void forceStop() {
-		this.forcedStop = true;
+		this.playing = false;
 		this.map.getMovingObjects().forEach(MovingObject::forceStop);
 	}
 	

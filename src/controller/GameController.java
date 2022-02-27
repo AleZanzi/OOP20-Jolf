@@ -125,6 +125,11 @@ public class GameController implements Controller, GameInput, GameOutput {
 	public void gameFinished(final int shots) {
 		this.nextMap();
 	}
+	
+	@Override
+	public void gameLost(int totalShots) {
+		this.nextMap();
+	}
 
 	@Override
 	public void enableShot(Point ballPosition) {
