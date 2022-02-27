@@ -11,13 +11,12 @@ import util.Point2D;
  * @author loren
  *
  */
-public class Wall implements MapObject {
+public abstract class Wall implements MapObject {
 	
 	private final Point2D position;
-	private static final Color WALL_COLOR = new Color(87, 61, 28);
 	private final int width;
 	private final int height;
-	private final Set<Edge> edges;
+	protected final Set<Edge> edges;
 	
 	/**
 	 * @param position
@@ -32,11 +31,10 @@ public class Wall implements MapObject {
 		final Point2D p2 = new Point2D(this.position.getX() + width - 1, this.position.getY());
 		final Point2D p3 = new Point2D(this.position.getX() + width - 1, this.position.getY() + height - 1);
 		final Point2D p4 = new Point2D(this.position.getX(), this.position.getY() + height - 1);
-		edges = Set.of(new Edge(p1, p2),
-				new Edge(p2, p3),
-				new Edge(p3, p4),
-				new Edge(p4, p1));
+		edges = setEdges(p1, p2, p3, p4);
 	}
+	
+	abstract protected Set<Edge> setEdges(Point2D p1, Point2D p2, Point2D p3, Point2D p4);
 
 	@Override
 	public Point2D getPosition() {
@@ -45,7 +43,6 @@ public class Wall implements MapObject {
 
 	@Override
 	public void draw(final Graphics g) {
-		g.setColor(WALL_COLOR);
 		g.fillRect(this.position.getIntX(), this.position.getIntY(), this.width, this.height);
 		g.setColor(Color.BLACK);
 		edges.forEach(edge -> g.drawLine(edge.getP1().getIntX(), 

@@ -11,10 +11,10 @@ import util.Vector2D;
  * @author loren
  *
  */
-public class Edge {
+abstract public class Edge {
 	
 	private Line2D line;
-	private Angle angle;
+	protected Angle angle;
 	
 	/**
 	 * @param x1
@@ -76,9 +76,7 @@ public class Edge {
 	 * @param directionAngle which has the ball
 	 * @return the resulting angle which the ball directs to after the collision
 	 */
-	public Angle resultAngle(Angle directionAngle) {
-		return Angle.ofRadians(this.angle.getRadians() * 2 - directionAngle.getRadians());
-	}
+	abstract public Angle resultAngle(Angle directionAngle);
 	
 	public void applyConstraintTo(final Ball ball) {
 		if (this.isHit(ball)) {
@@ -92,9 +90,6 @@ public class Edge {
 	 * @param vector
 	 * @return the resulting edge translated by the vector
 	 */
-	public Edge translate(Vector2D vector) {
-		return new Edge(vector.traslate(this.getP1()),
-				vector.traslate(this.getP2()));
-	}
+	abstract public Edge translate(Vector2D vector);
 	
 }
