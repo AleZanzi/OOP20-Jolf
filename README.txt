@@ -8,3 +8,8 @@ Creators
 https://github.com/zanetti33
 https://github.com/Pedro-1309
 https://github.com/AleZanzi
+
+Jolf-Zanzi:
+New Map Hole7;
+New Wall type IronWall, that has a different type of response when hitted;
+New element LavaPoddle, that ends the hole and adds 10 shots to your total.
